@@ -56,9 +56,7 @@ async def op(_, m: Message):
         return
     keyboard = InlineKeyboardMarkup(
         [[
-            InlineKeyboardButton("Channel", url="https://t.me/SayaProject"),
-            InlineKeyboardButton("Support", url="https://t.me/SayaProject"),
-            InlineKeyboardButton("Dev", url="https://t.me/sexyafraid")
+            
         ]]
     )
     add_user(m.from_user.id)

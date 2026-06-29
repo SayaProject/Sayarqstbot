@@ -13,7 +13,7 @@ app = Client(
     bot_token=cfg.BOT_TOKEN
 )
 
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Main process ━━━━━━━━━━━━━━━[...]
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Main process ━━━━━━━━━━━━━━━
 
 @app.on_chat_join_request(filters.group | filters.channel)
 async def approve(_, m : Message):
@@ -35,7 +35,7 @@ async def approve(_, m : Message):
     except Exception as err:
         print(str(err))    
  
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Start ━━━━━━━━━━━━━━━[...]
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Start ━━━━━━━━━━━━━━━━
 
 @app.on_message(filters.private & filters.command("start"))
 async def op(_, m :Message):
@@ -58,14 +58,15 @@ async def op(_, m :Message):
     keyboard = InlineKeyboardMarkup(
         [[
             InlineKeyboardButton("Channel", url="https://t.me/SayaProject"),
-            InlineKeyboardButton("Support", url="https://t.me/SayaProject")
+            InlineKeyboardButton("Support", url="https://t.me/SayaProject"),
+            InlineKeyboardButton("Dev", url="https://t.me/sexyafraid")
         ]]
     )
     add_user(m.from_user.id)
-    await m.reply_photo("https://files.catbox.moe/m2tuuk.webp", caption="**🦊 Hello {}!\nI'm an auto approve [Admin Join Requests]({}) Bot.\nI can approve users in Groups/Channels.Add me to your[...]
+    await m.reply_photo("https://files.catbox.moe/m2tuuk.webp", caption="**🦊 Hello {}!\nI'm an auto approve [Admin Join Requests]() Bot.\nI can approve users in Groups/Channels.\n\nAdd me to your chat and promote me to admin with add members permission.\n\n__Powerd By : @SayaProject\nDev By : @sexyafraid __**".format(m.from_user.mention), reply_markup=keyboard)
     
 
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ callback ━━━━━━━━━━━━━━[...]
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ callback ━━━━━━━━━━━━━━━━
 
 @app.on_callback_query(filters.regex("chk"))
 async def chk(_, cb : CallbackQuery):
@@ -77,14 +78,15 @@ async def chk(_, cb : CallbackQuery):
     keyboard = InlineKeyboardMarkup(
         [[
             InlineKeyboardButton("Channel", url="https://t.me/SayaProject"),
-            InlineKeyboardButton("Support", url="https://t.me/SayaProject")
+            InlineKeyboardButton("Support", url="https://t.me/SayaProject"),
+            InlineKeyboardButton("Dev", url="https://t.me/sexyafraid")
         ]]
     )
-    add_user(m.from_user.id)
-    await cb.edit_text(text="**🦊 Hello {}!\nI'm an auto approve [Admin Join Requests]({}) Bot.\nI can approve users in Groups/Channels.Add me to your chat and promote me to admin with add membe[...]
+    add_user(cb.from_user.id)
+    await cb.edit_text(text="**🦊 Hello {}!\nI'm an auto approve [Admin Join Requests]() Bot.\nI can approve users in Groups/Channels.\n\nAdd me to your chat and promote me to admin with add members permission.\n\n__Powerd By : @SayaProject\nDev By : @sexyafraid __**".format(cb.from_user.mention), reply_markup=keyboard)
     
 
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ info ━━━━━━━━━━━━━━━[...]
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ info ━━━━━━━━━━━━━━━━━
 
 @app.on_message(filters.command("users") & filters.user(cfg.SUDO))
 async def dbtool(_, m : Message):
@@ -97,7 +99,7 @@ async def dbtool(_, m : Message):
 👥 Groups : `{x}`
 🚧 Total users & groups : `{tot}` """)
 
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Broadcast ━━━━━━━━━━━━━[...]
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Broadcast ━━━━━━━━━━━━━━
 
 @app.on_message(filters.command("bcast") & filters.user(cfg.SUDO))
 async def bcast(_, m : Message):
@@ -129,7 +131,7 @@ async def bcast(_, m : Message):
 
     await lel.edit(f"✅Successfull to `{success}` users.\n❌ Faild to `{failed}` users.\n👾 Found `{blocked}` Blocked users \n👻 Found `{deactivated}` Deactivated users.")
 
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Broadcast Forward ━━━━━━━[...]
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Broadcast Forward ━━━━━━
 
 @app.on_message(filters.command("fcast") & filters.user(cfg.SUDO))
 async def fcast(_, m : Message):
